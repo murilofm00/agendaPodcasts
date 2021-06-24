@@ -1,11 +1,12 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import firebase, { auth } from "./plugins/firebase";
+import AddUserScreen from "./screens/AddUserScreen";
 import LoginScreen from "./screens/LoginScreen";
 import PodcastScreen from "./screens/PodcastScreen";
 import UserScreen from "./screens/UserScreen";
@@ -46,6 +47,7 @@ export default function App() {
                 }}
               />
               <Stack.Screen name="Usuário" component={UserScreen}  />
+              <Stack.Screen name="Adicionar Usuário" component={AddUserScreen}  />
             </>
           ) : (
             <>

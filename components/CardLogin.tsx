@@ -50,9 +50,5 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 7,
-    // width: 250,
-    // flex: 1,
-    // flexDirection: "column",
-    // width: "auto",
   },
 });
