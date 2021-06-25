@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    minHeight: 100,
+    flexBasis: 150,
   },
   icon: {
     marginRight: 5,

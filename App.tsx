@@ -6,10 +6,12 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import firebase, { auth } from "./plugins/firebase";
-import AddUserScreen from "./screens/AddUserScreen";
+import AddEpisodioScreen from "./screens/AddEpisodioScreen";
+import AddAmigoScreen from "./screens/AddAmigoScreen";
 import LoginScreen from "./screens/LoginScreen";
 import PodcastScreen from "./screens/PodcastScreen";
 import UserScreen from "./screens/UserScreen";
+import CriarUsuarioScreen from "./screens/CriarUsuario";
 
 const Stack = createStackNavigator();
 
@@ -31,23 +33,30 @@ export default function App() {
               <Stack.Screen
                 name="Podcasts"
                 component={PodcastScreen}
-                options={({  navigation  }) => {
+                options={({ navigation }) => {
                   return {
-                      headerRight: () => (
-                        <FontAwesome5
-                          name="user-circle"
-                          size={30}
-                          style={{ margin: 7, marginRight: 15 }}
-                          color="black"
-                          onPress={() => navigation.navigate("Usuário")}
-                        />
-                      ),
-                    };
-                ;
+                    headerRight: () => (
+                      <FontAwesome5
+                        name="user-circle"
+                        size={30}
+                        style={{ margin: 7, marginRight: 15 }}
+                        color="black"
+                        onPress={() => navigation.navigate("Usuário")}
+                      />
+                    ),
+                  };
                 }}
               />
-              <Stack.Screen name="Usuário" component={UserScreen}  />
-              <Stack.Screen name="Adicionar Usuário" component={AddUserScreen}  />
+              <Stack.Screen name="Usuário" component={UserScreen} />
+              <Stack.Screen name="Criar Usuário" component={CriarUsuarioScreen} />
+              <Stack.Screen
+                name="Adicionar Amigo"
+                component={AddAmigoScreen}
+              />
+              <Stack.Screen
+                name="Adicionar Episódio"
+                component={AddEpisodioScreen}
+              />
             </>
           ) : (
             <>

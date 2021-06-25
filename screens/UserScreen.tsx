@@ -15,12 +15,14 @@ import IUsuario from "../models/IUsuario";
 import { auth, db } from "../plugins/firebase";
 
 export default function UserScreen({ navigation }: { navigation: any }) {
-  const [amigos, setAmigos] = useState<IUsuario[]>();
   const userId = auth.currentUser?.uid;
+  const [amigos, setAmigos] = useState<IUsuario[]>();
+  const [usuario, setUsuario] = useState<IUsuario>();
 
   useEffect(() => {
     if (userId) {
-      const getAmigos = db.ref("amigos")
+      const getAmigos = db
+        .ref("amigos")
         .child(userId)
         .on("value", (snap) => {
           var amigos: IUsuario[] = [];
@@ -31,19 +33,37 @@ export default function UserScreen({ navigation }: { navigation: any }) {
           setAmigos(amigos);
         });
 
-        return () => db.ref("amigos").child(userId).off('value', getAmigos);
-      }    
+      return () => db.ref("amigos").child(userId).off("value", getAmigos);
+    }
+  }, [amigos]);
+
+  useEffect(() => {
+    if (userId) {
+      const getAmigos = db
+        .ref("usuarios")
+        .child(userId)
+        .on("value", (snap) => {
+          setUsuario(snap.val());
+        });
+
+      return () => db.ref("amigos").child(userId).off("value", getAmigos);
+    }
   }, [amigos]);
 
   return (
     <SafeAreaView style={styles.userScreen}>
-      <UsuarioCard
-        usuario={{
-          nome: "Murilo",
-          email: "murilofm@unipam.edu.br",
-          cidade: "Lagoa Formosa",
-        }}
-      />
+      {usuario ? (
+        <UsuarioCard
+          usuario={usuario}
+        />
+      ) : (
+        <View style={styles.criarUsuario}>
+          <Button
+          title="➕ Criar Usuário"
+          onPress={() => navigation.navigate("Criar Usuário")}
+          />
+        </View>
+      )}
       <View style={styles.deslogarButton}>
         <Button title="Deslogar" onPress={() => auth.signOut()}></Button>
       </View>
@@ -54,7 +74,7 @@ export default function UserScreen({ navigation }: { navigation: any }) {
             name="pluscircleo"
             size={24}
             color="black"
-            onPress={() => navigation.navigate("Adicionar Usuário")}
+            onPress={() => navigation.navigate("Adicionar Amigo")}
           />
         </View>
         <View>
@@ -78,6 +98,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: "500",
     paddingRight: 20,
+  },
+  criarUsuario: {
+    flex: 1,
+    flexBasis: 100,
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center"
   },
   deslogarButton: {
     margin: 20,

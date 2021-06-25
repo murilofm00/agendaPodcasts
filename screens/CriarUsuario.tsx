@@ -4,13 +4,17 @@ import UsuarioForm from "../components/UsuarioForm";
 import IUsuario from "../models/IUsuario";
 import { auth, db } from "../plugins/firebase";
 
-export default function AddUserScreen({ navigation }: { navigation: any }) {
+export default function CriarUsuarioScreen({
+  navigation,
+}: {
+  navigation: any;
+}) {
   const userId = auth.currentUser?.uid;
   async function salvarUsuario(usuario: IUsuario) {
     if (userId) {
-      db.ref("amigos")
+      db.ref("usuarios")
         .child(userId)
-        .push(usuario)
+        .set(usuario)
         .then(() => navigation.navigate("Usuário"));
     }
   }
