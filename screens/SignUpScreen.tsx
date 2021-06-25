@@ -1,17 +1,10 @@
 import React from "react";
-import { Alert } from "react-native";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import CardLogin from "../components/CardLogin";
 import ILogin from "../models/ILogin";
 import { auth } from "../plugins/firebase";
 
-export default function LoginScreen({ navigation }: { navigation: any }) {
+export default function LoginScreen() {
   function doLogin({ email, password }: ILogin) {
     auth.createUserWithEmailAndPassword(email, password).then((user) => {
       if (user) {
