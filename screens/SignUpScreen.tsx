@@ -1,4 +1,5 @@
 import React from "react";
+import { Alert } from "react-native";
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,9 +13,9 @@ import { auth } from "../plugins/firebase";
 
 export default function LoginScreen({ navigation }: { navigation: any }) {
   function doLogin({ email, password }: ILogin) {
-    auth.signInWithEmailAndPassword(email, password).then((user) => {
+    auth.createUserWithEmailAndPassword(email, password).then((user) => {
       if (user) {
-        navigation.navigate("Podcasts");
+        Alert.alert("Usuário criado");
       }
     });
   }

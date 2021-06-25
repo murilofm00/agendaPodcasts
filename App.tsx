@@ -12,6 +12,7 @@ import LoginScreen from "./screens/LoginScreen";
 import PodcastScreen from "./screens/PodcastScreen";
 import UserScreen from "./screens/UserScreen";
 import CriarUsuarioScreen from "./screens/CriarUsuario";
+import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack = createStackNavigator();
 
@@ -48,11 +49,11 @@ export default function App() {
                 }}
               />
               <Stack.Screen name="Usuário" component={UserScreen} />
-              <Stack.Screen name="Criar Usuário" component={CriarUsuarioScreen} />
               <Stack.Screen
-                name="Adicionar Amigo"
-                component={AddAmigoScreen}
+                name="Criar Usuário"
+                component={CriarUsuarioScreen}
               />
+              <Stack.Screen name="Adicionar Amigo" component={AddAmigoScreen} />
               <Stack.Screen
                 name="Adicionar Episódio"
                 component={AddEpisodioScreen}
@@ -61,7 +62,7 @@ export default function App() {
           ) : (
             <>
               <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="Sign Up" component={LoginScreen} />
+              <Stack.Screen name="Sign Up" component={SignUpScreen} />
             </>
           )}
         </Stack.Navigator>
